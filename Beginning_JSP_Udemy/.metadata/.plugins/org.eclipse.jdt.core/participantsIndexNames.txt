@@ -1,0 +1,11 @@
+INDEX VERSION 1.131
+/home/tbenyahia/Projects/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/411493201.index
+/servletdemo/src
+/home/tbenyahia/Projects/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/4170143903.index
+/tagdemo/src
+/home/tbenyahia/Projects/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2729125464.index
+/web-student-tracker/src
+/home/tbenyahia/Projects/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/397597023.index
+/jspdemo/src
+/home/tbenyahia/Projects/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/896135630.index
+/jspdemo/src
