@@ -153,13 +153,9 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="/home/tbenyahia/Projects/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ROOT" path="" reloadable="false"/><Context docBase="/home/tbenyahia/Projects/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/jspdemo" path="/jspdemo" reloadable="true" source="org.eclipse.jst.jee.server:jspdemo"/><Context docBase="/home/tbenyahia/Projects/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/tagdemo" path="/tagdemo" reloadable="true" source="org.eclipse.jst.jee.server:tagdemo"/><Context docBase="/home/tbenyahia/Projects/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/servletdemo" path="/servletdemo" reloadable="true" source="org.eclipse.jst.jee.server:servletdemo"/><Context docBase="/home/tbenyahia/Projects/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/web-student-tracker" path="/web-student-tracker" reloadable="true" source="org.eclipse.jst.jee.server:web-student-tracker">
+      <Context docBase="/home/tbenyahia/Projects/BudgetApp/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ROOT" path="" reloadable="false"/><Context docBase="/home/tbenyahia/Projects/BudgetApp/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/the-budget-app" path="/the-budget-app" reloadable="true" source="org.eclipse.jst.jee.server:the-budget-app">
 
-  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="5" maxWait="10000" name="jdbc/web_student_tracker" password="webstudent" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/web_student_tracker?useSSL=false&amp;serverTimezone=UTC" username="webstudent"/>
-
-</Context><Context docBase="/home/tbenyahia/Projects/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/BudgetApp" path="/BudgetApp" reloadable="true" source="org.eclipse.jst.jee.server:BudgetApp">
-
-  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="5" maxWait="10000" name="jdbc/app_member_tracker" password="member" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/app_member_tracker?useSSL=false&amp;serverTimezone=UTC" username="member"/>
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="5" maxWait="10000" name="jdbc/budget_app_db" password="budget_app" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/budget_app_db?useSSL=false&amp;serverTimezone=UTC" username="budget_app"/>
 
 </Context></Host>
     </Engine>
