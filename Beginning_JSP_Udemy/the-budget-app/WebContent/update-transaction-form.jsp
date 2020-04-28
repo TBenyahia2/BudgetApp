@@ -52,7 +52,7 @@
 		</form>
 		<div style="clear: both;">
 		<p>
-			<a href="TransactionControllerServlet">Back to List</a>
+			<a href="account-administrator-home.jsp">Back to Admin Home</a>
 		</p>
 		</div>
 	</div>

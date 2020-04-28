@@ -178,7 +178,7 @@ public class AccountControllerServlet extends HttpServlet {
 		request.setAttribute("ACCOUNT_LIST", accounts);
 		
 		// send to the jsp page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-accounts.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("account-administrator-home.jsp");
 		dispatcher.forward(request, response);
 	}
 

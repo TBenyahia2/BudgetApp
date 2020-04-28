@@ -48,7 +48,7 @@
 		</form>
 		<div style="clear: both;"></div>
 		<p>
-			<a href="MemberControllerServlet">Back to Member List</a>
+			<a href="account-administrator-home.jsp">Back to Admin Home</a>
 		</p>	
 	</div>
 </body>

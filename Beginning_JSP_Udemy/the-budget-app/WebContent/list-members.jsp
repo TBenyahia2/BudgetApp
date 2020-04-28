@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>App Member List</title>
+	<title>Member List</title>
 	<link type="text/css" rel="stylesheet" href="css/style.css">
 </head>
 

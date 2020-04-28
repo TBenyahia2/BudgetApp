@@ -189,8 +189,7 @@ public class MemberDbUtil {
 
 		try {
 			//Convert memberId  to int
-
-
+			
 			// checking if user exists
 			tempMember = getMember(theMemberId);
 			if(tempMember != null){
@@ -205,10 +204,7 @@ public class MemberDbUtil {
 						return true;
 
 					}
-
 				}
-
-
 			}
 
 			return false;
@@ -249,4 +245,53 @@ public class MemberDbUtil {
 			close(myConn, myStmt, null);
 		}		
 	}
+	
+/*	public boolean checkLogin(String accountId, String pin, String ) throws Exception {
+		Member theMember = null;
+		
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		int memberId;
+		
+		try {
+			//convert member id to int
+			memberId = Integer.parseInt(theMemberId);
+			
+			//get connection to db
+			myConn = dataSource.getConnection();
+			
+			//create sql statement to get the selected member
+			String sql = "select * from member where id=?";
+			
+			//create prepared statement
+			myStmt = myConn.prepareStatement(sql);
+			
+			//set params
+			myStmt.setInt(1, memberId);
+			
+			//execute statement
+			myRs = myStmt.executeQuery();
+			
+			//retrieve data from result set
+			if(myRs.next()) {
+				String firstName = myRs.getString("name");
+				String lastName = myRs.getString("userName");
+				String email = myRs.getString("email");
+				int account_id = myRs.getInt("account_id");
+				int pin = myRs.getInt("account_pin");
+				
+				//use the memberId during construction
+				theMember = new Member(memberId, firstName, lastName, email, account_id, pin);
+			}
+			else {
+				throw new Exception("Could not find member id: " + memberId);
+			}
+			return theMember;
+		}
+		finally {
+			//clean up JDBC object
+			close(myConn, myStmt, myRs);
+		}
+	}*/
 }

@@ -1,7 +1,5 @@
 package com.the_budget_app.web.jdbc;
 
-import com.sun.net.httpserver.HttpServer;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -50,6 +48,9 @@ public class MemberControllerServlet extends HttpServlet {
 			case "ADD":
 				addMember(request, response);
 				break;
+			//case "LOGIN":
+				//validateLogin(request, response);
+				//break;
 			default:
 				listMembers(request, response);
 			}
@@ -97,9 +98,6 @@ public class MemberControllerServlet extends HttpServlet {
 		}
 	
 	}
-
-
-
 
 	private void deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		// read member Id from form data
@@ -149,11 +147,13 @@ public class MemberControllerServlet extends HttpServlet {
 
 	private void addMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// read Member form data
+		
 		String name = request.getParameter("name");
 		String userName = request.getParameter("userName");
 		String email = request.getParameter("email");
 		int account_id = Integer.parseInt(request.getParameter("account_id"));
 		int pin = Integer.parseInt(request.getParameter("account_pin"));
+		
 		//create new member object
 		Member theMember = new Member(name, userName, email, account_id, pin);
 			
@@ -173,22 +173,25 @@ public class MemberControllerServlet extends HttpServlet {
 		request.setAttribute("MEMBER_LIST", members);
 		
 		//send to JSP page for viewing
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-members.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/account-administrator-home.jsp");
 		dispatcher.forward(request, response);
 		
 	}
 
 
-	private void validateLogin(HttpServletRequest request, HttpServerResponse response) throws Exception{
+	/* private void validateLogin(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
 		String userName = request.getParameter("userName");
 		int pin = Integer.parseInt(request.getParameter("pinCode"));
-		String accountId = request.getParameter("accountId");
+		String accountId = request.getParameter("account_id");
 		Member member;
 		Account account;
 
 		// checks if all credentials are correct
-
+		accountDbUtil.getAccount(accountId);
+		
+		
+		
 		if(memberDbUtil.validateLogin(accountId, pin, userName) == true){
 
 			// login is correct, check if user is admin
@@ -199,18 +202,16 @@ public class MemberControllerServlet extends HttpServlet {
 			if(account.getUsername().equals(member.getUserName())){
 
 				// redirect to admin page
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/account-administrator-home.jsp");
 
 			}
 
 			else{
 
 				// redirect to user page
+				//RequestDispatcher dispatcher = request.getRequestDispatcher("/list-members.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/list-transactions.jsp");
 			}
 
-		}
-
-
-	}
-
-
+		}*/
 }
