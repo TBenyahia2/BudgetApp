@@ -8,7 +8,7 @@ public class Member {
 	private String email;
 	private int account_id;
 	private int pin;
-	
+
 	public Member(String name, String userName, String email, int account_id, int pin) {
 		this.name = name;
 		this.userName = userName;

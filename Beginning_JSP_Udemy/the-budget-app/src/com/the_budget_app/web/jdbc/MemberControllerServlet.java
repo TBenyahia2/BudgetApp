@@ -1,5 +1,7 @@
 package com.the_budget_app.web.jdbc;
 
+import com.sun.net.httpserver.HttpServer;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class MemberControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private MemberDbUtil memberDbUtil;
+	private AccountDbUtil accountDbUtil;
 	
 	@Resource(name="jdbc/budget_app_db")
 	private DataSource dataSource;
@@ -95,6 +98,9 @@ public class MemberControllerServlet extends HttpServlet {
 	
 	}
 
+
+
+
 	private void deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		// read member Id from form data
 		String theMemberId = request.getParameter("memberId");
@@ -124,6 +130,7 @@ public class MemberControllerServlet extends HttpServlet {
 		//send back to the "list-members page TODO: send back to MemberHome
 		listMembers(request,response);
 	}
+
 
 	private void loadMember(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		// read memberId from form data
@@ -170,4 +177,40 @@ public class MemberControllerServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 		
 	}
+
+
+	private void validateLogin(HttpServletRequest request, HttpServerResponse response) throws Exception{
+
+		String userName = request.getParameter("userName");
+		int pin = Integer.parseInt(request.getParameter("pinCode"));
+		String accountId = request.getParameter("accountId");
+		Member member;
+		Account account;
+
+		// checks if all credentials are correct
+
+		if(memberDbUtil.validateLogin(accountId, pin, userName) == true){
+
+			// login is correct, check if user is admin
+			// loading the account
+			account = accountDbUtil.getAccount(accountId);
+			member = memberDbUtil.getMember(accountId);
+
+			if(account.getUsername().equals(member.getUserName())){
+
+				// redirect to admin page
+
+			}
+
+			else{
+
+				// redirect to user page
+			}
+
+		}
+
+
+	}
+
+
 }

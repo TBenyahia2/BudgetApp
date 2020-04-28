@@ -119,7 +119,7 @@ public class MemberDbUtil {
 			//get connection to db
 			myConn = dataSource.getConnection();
 			
-			//creat sql statement to get the selected member
+			//create sql statement to get the selected member
 			String sql = "select * from member where id=?";
 			
 			//create prepared statement
@@ -181,6 +181,45 @@ public class MemberDbUtil {
 		}
 		
 	}
+
+
+	public Boolean validateLogin(String theMemberId, Integer pin, String username) throws Exception{
+
+		Member tempMember;
+
+		try {
+			//Convert memberId  to int
+
+
+			// checking if user exists
+			tempMember = getMember(theMemberId);
+			if(tempMember != null){
+
+				// if account exists check pin
+				if(tempMember.getPin() == pin){
+
+					// pin correct so we'll check if the username is also correct.
+					if(tempMember.getUserName().equals(username)){
+
+						// everything's correct! continue with login
+						return true;
+
+					}
+
+				}
+
+
+			}
+
+			return false;
+
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
 
 	public void deleteMember(String theMemberId) throws Exception {
 		Connection myConn = null;
