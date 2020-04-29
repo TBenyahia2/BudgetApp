@@ -4,7 +4,7 @@
 
 <!-- This will load from top down until it finds a page to display -->
   <welcome-file-list>
-   <!--   <welcome-file>login.jsp</welcome-file> -->
+    <welcome-file>login.jsp</welcome-file> 
   	<welcome-file>account-administrator-home.jsp</welcome-file>
   	<welcome-file>index.jsp</welcome-file>
   	<welcome-file>index.html</welcome-file>

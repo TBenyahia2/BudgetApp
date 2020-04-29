@@ -48,9 +48,6 @@ public class MemberControllerServlet extends HttpServlet {
 			case "ADD":
 				addMember(request, response);
 				break;
-			//case "LOGIN":
-				//validateLogin(request, response);
-				//break;
 			default:
 				listMembers(request, response);
 			}
@@ -84,6 +81,8 @@ public class MemberControllerServlet extends HttpServlet {
 					break;
 				case "DELETE":
 					deleteMember(request, response);
+				case "LOGIN":
+					validateLogin(request, response);
 				default:
 					//TODO : Change default to MemberHome
 					listMembers(request, response);
@@ -133,9 +132,10 @@ public class MemberControllerServlet extends HttpServlet {
 	private void loadMember(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		// read memberId from form data
 		String theMemberId = request.getParameter("memberId");
+		String theAccountId = request.getParameter("accountId");
 		
 		//get member from db util
-		Member theMember = memberDbUtil.getMember(theMemberId);
+		Member theMember = memberDbUtil.getMember(theMemberId, theAccountId);
 		
 		//place member in the request attribute
 		request.setAttribute("THE_MEMBER", theMember);
@@ -179,39 +179,33 @@ public class MemberControllerServlet extends HttpServlet {
 	}
 
 
-	/* private void validateLogin(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	private void validateLogin(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
+		//get the form data 
 		String userName = request.getParameter("userName");
-		int pin = Integer.parseInt(request.getParameter("pinCode"));
+		String pin = request.getParameter("pin");
 		String accountId = request.getParameter("account_id");
-		Member member;
-		Account account;
-
-		// checks if all credentials are correct
-		accountDbUtil.getAccount(accountId);
+		Account theAccount;
+		Member theMember;
 		
+		// Credentials Check Login
+		// Step 1: find account using the accountDbUtil with input accountId
+		//	accountDbUtil will throw error if Id does not exist or pin doesn't match
+		theAccount = accountDbUtil.getAccount(accountId, pin);
+		if(theAccount == null) {
+			throw new Exception("The Account credential failure");
+		}
 		
-		
-		if(memberDbUtil.validateLogin(accountId, pin, userName) == true){
-
-			// login is correct, check if user is admin
-			// loading the account
-			account = accountDbUtil.getAccount(accountId);
-			member = memberDbUtil.getMember(accountId);
-
-			if(account.getUsername().equals(member.getUserName())){
-
-				// redirect to admin page
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/account-administrator-home.jsp");
-
-			}
-
-			else{
-
-				// redirect to user page
-				//RequestDispatcher dispatcher = request.getRequestDispatcher("/list-members.jsp");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/list-transactions.jsp");
-			}
-
-		}*/
+		// Step 2: Validate the input pin matches the account set pin
+		//get the member using account_id and username, will throw error if member doesn't exist
+		theMember = memberDbUtil.getMember(userName, accountId);			
+		if(theMember == null) {
+			throw new Exception("The Member credential failure");
+		}
+		// Step 3: List the members? for now TODO
+		else {
+			listMembers(request, response);
+		}		
+	}
 }
+

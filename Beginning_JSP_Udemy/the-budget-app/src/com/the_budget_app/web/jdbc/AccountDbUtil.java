@@ -107,28 +107,29 @@ public class AccountDbUtil {
 		}
 	}
 
-	public Account getAccount(String theAccountId) throws Exception {
+	public Account getAccount(String accountId, String accountPin) throws Exception {
 		Account theAccount = null;
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
-		int accountId;
+		int theAccountId = Integer.parseInt(accountId);;
+		int pin = Integer.parseInt(accountPin);
 		
-		try {
-			//convert accountId to int
-			accountId = Integer.parseInt(theAccountId);
-			
+		
+		try {			
 			//get connection to DB
 			myConn = dataSource.getConnection();
 			
+			//admin check
 			//create sql statement to the get desired account
-			String sql = "select * from account where id=?";
+			String sql = "select * from account where id=? and pin=?";
 			
 			//create prepared statement
 			myStmt = myConn.prepareStatement(sql);
 			
 			//set params for query
-			myStmt.setInt(1, accountId); 
+			myStmt.setInt(1, theAccountId);
+			myStmt.setInt(2, pin);
 			
 			//execute the statement
 			myRs = myStmt.executeQuery();
@@ -140,13 +141,12 @@ public class AccountDbUtil {
 				String email = myRs.getString("email");
 				String username = myRs.getString("username");
 				String name = myRs.getString("name");
-				int pin = Integer.parseInt(myRs.getString("pin"));
 				
 				//use the accountId during construction
-				theAccount = new Account(accountId, account_name, total_amount, email, username, name, pin);
+				theAccount = new Account(theAccountId, account_name, total_amount, email, username, name, pin);
 			}
 			else {
-				throw new Exception("Could not find the Account for AccountId: " + accountId);
+				throw new Exception("Could not find the Account for AccountId: " + accountId + " and the given pin.");
 			}		
 		return theAccount;
 		}

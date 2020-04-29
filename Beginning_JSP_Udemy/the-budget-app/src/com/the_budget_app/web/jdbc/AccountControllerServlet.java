@@ -137,9 +137,11 @@ public class AccountControllerServlet extends HttpServlet {
 	private void loadAccount(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//get accountId from form data
 		String theAccountId = request.getParameter("accountId");
+		String theAccountPin = request.getParameter("pin");
+		
 		
 		//get account from DB util
-		Account theAccount = accountDbUtil.getAccount(theAccountId);
+		Account theAccount = accountDbUtil.getAccount(theAccountId, theAccountPin);
 		
 		//place account into the request attribute
 		request.setAttribute("THE_ACCOUNT", theAccount);

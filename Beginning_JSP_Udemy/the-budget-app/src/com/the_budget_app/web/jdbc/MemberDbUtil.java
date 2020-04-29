@@ -104,46 +104,44 @@ public class MemberDbUtil {
 		}
 	}
 
-	public Member getMember(String theMemberId) throws Exception {
+	public Member getMember(String userName, String accountId) throws Exception {
 		Member theMember = null;
 		
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
-		int memberId;
 		
-		try {
-			//convert member id to int
-			memberId = Integer.parseInt(theMemberId);
-			
+ 		try {
 			//get connection to db
 			myConn = dataSource.getConnection();
 			
 			//create sql statement to get the selected member
-			String sql = "select * from member where id=?";
+			String sql = "select * from member where userName=? and account_pin=?";
 			
 			//create prepared statement
 			myStmt = myConn.prepareStatement(sql);
 			
 			//set params
-			myStmt.setInt(1, memberId);
+			myStmt.setString(1, userName);
+			myStmt.setString(2, accountId);
 			
 			//execute statement
 			myRs = myStmt.executeQuery();
 			
 			//retrieve data from result set
 			if(myRs.next()) {
-				String firstName = myRs.getString("name");
-				String lastName = myRs.getString("userName");
+				int memberId = myRs.getInt("id");
+				String name = myRs.getString("name");
+				String user = myRs.getString("userName");
 				String email = myRs.getString("email");
 				int account_id = myRs.getInt("account_id");
 				int pin = myRs.getInt("account_pin");
 				
 				//use the memberId during construction
-				theMember = new Member(memberId, firstName, lastName, email, account_id, pin);
+				theMember = new Member(memberId, name, user, email, account_id, pin);
 			}
 			else {
-				throw new Exception("Could not find member id: " + memberId);
+				throw new Exception("Could not find member with credentials given.");
 			}
 			return theMember;
 		}
@@ -183,7 +181,7 @@ public class MemberDbUtil {
 	}
 
 
-	public Boolean validateLogin(String theMemberId, Integer pin, String username) throws Exception{
+	/*public Boolean validateLogin(String theMemberId, Integer pin, String username) throws Exception{
 
 		Member tempMember;
 
@@ -214,7 +212,7 @@ public class MemberDbUtil {
 		}
 
 		return false;
-	}
+	}*/
 
 
 	public void deleteMember(String theMemberId) throws Exception {
