@@ -107,13 +107,12 @@ public class AccountDbUtil {
 		}
 	}
 
-	public Account getAccount(String accountId, String accountPin) throws Exception {
+	public Account getAccount(String accountId) throws Exception {
 		Account theAccount = null;
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 		int theAccountId = Integer.parseInt(accountId);;
-		int pin = Integer.parseInt(accountPin);
 		
 		
 		try {			
@@ -122,14 +121,13 @@ public class AccountDbUtil {
 			
 			//admin check
 			//create sql statement to the get desired account
-			String sql = "select * from account where id=? and pin=?";
+			String sql = "select * from account where id=?";
 			
 			//create prepared statement
 			myStmt = myConn.prepareStatement(sql);
 			
 			//set params for query
 			myStmt.setInt(1, theAccountId);
-			myStmt.setInt(2, pin);
 			
 			//execute the statement
 			myRs = myStmt.executeQuery();
@@ -141,12 +139,13 @@ public class AccountDbUtil {
 				String email = myRs.getString("email");
 				String username = myRs.getString("username");
 				String name = myRs.getString("name");
+				int pin = Integer.parseInt(myRs.getString("pin"));
 				
 				//use the accountId during construction
 				theAccount = new Account(theAccountId, account_name, total_amount, email, username, name, pin);
 			}
 			else {
-				throw new Exception("Could not find the Account for AccountId: " + accountId + " and the given pin.");
+				throw new Exception("Could not find the Account for AccountId: " + accountId);
 			}		
 		return theAccount;
 		}
@@ -186,7 +185,6 @@ public class AccountDbUtil {
 			close(myConn, myStmt, null);
 		}
 	}
-
 	public void deleteAccount(String theAccountId) throws Exception {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;

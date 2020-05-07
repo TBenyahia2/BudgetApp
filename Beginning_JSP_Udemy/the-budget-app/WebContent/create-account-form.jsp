@@ -49,7 +49,7 @@
 		</form>
 		<div style="clear: both;"></div>
 		<p>
-			<a href="account-administrator-home.jsp">Back to Admin Home</a>
+			<a href="welcome-page.jsp">Back to Account Selection</a>
 	</div>
 </body>
 </html>

@@ -163,7 +163,7 @@ public class MemberControllerServlet extends HttpServlet {
 		//direct back to theMemberList, send as redirect to avoid multiple browser reloads issue
 		//TODO : switch to direct to MemberHome
 		response.sendRedirect(request.getContextPath() + "/MemberControllerServlet?command=LIST");
-	}
+	} 
 
 	private void listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//get members from db util
@@ -173,7 +173,7 @@ public class MemberControllerServlet extends HttpServlet {
 		request.setAttribute("MEMBER_LIST", members);
 		
 		//send to JSP page for viewing
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/account-administrator-home.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-members.jsp");
 		dispatcher.forward(request, response);
 		
 	}
@@ -182,30 +182,29 @@ public class MemberControllerServlet extends HttpServlet {
 	private void validateLogin(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
 		//get the form data 
-		String userName = request.getParameter("userName");
-		String pin = request.getParameter("pin");
 		String accountId = request.getParameter("account_id");
-		Account theAccount;
-		Member theMember;
-		
-		// Credentials Check Login
-		// Step 1: find account using the accountDbUtil with input accountId
-		//	accountDbUtil will throw error if Id does not exist or pin doesn't match
-		theAccount = accountDbUtil.getAccount(accountId, pin);
-		if(theAccount == null) {
-			throw new Exception("The Account credential failure");
+		String userName = request.getParameter("userName");
+		int pin = Integer.parseInt(request.getParameter("account_pin"));
+		try {				
+			// Credentials Check Login
+			// Step 1: find account using the accountDbUtil with input accountId
+			Account theAccount = accountDbUtil.getAccount(accountId);
+			// Step 2: Validate the input pin matches the account set pin
+			if(theAccount.getPin() == pin) {
+				if(theAccount.getUsername().equals(userName)) {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/account-administrator-home.jsp");
+					dispatcher.forward(request, response);
+				}
+				else {
+					Member theMember = memberDbUtil.getMember(userName, accountId);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/account-member-home.jsp");
+					dispatcher.forward(request, response);
+				}
+			}
 		}
-		
-		// Step 2: Validate the input pin matches the account set pin
-		//get the member using account_id and username, will throw error if member doesn't exist
-		theMember = memberDbUtil.getMember(userName, accountId);			
-		if(theMember == null) {
-			throw new Exception("The Member credential failure");
+		catch (NullPointerException e){
+			System.out.print("Caught NullPointerException");
 		}
-		// Step 3: List the members? for now TODO
-		else {
-			listMembers(request, response);
-		}		
 	}
 }
 

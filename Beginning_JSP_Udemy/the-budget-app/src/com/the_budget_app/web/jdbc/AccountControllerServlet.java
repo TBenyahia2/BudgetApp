@@ -136,19 +136,17 @@ public class AccountControllerServlet extends HttpServlet {
 
 	private void loadAccount(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//get accountId from form data
-		String theAccountId = request.getParameter("accountId");
-		String theAccountPin = request.getParameter("pin");
-		
+		String theAccountId = request.getParameter("accountId");	
 		
 		//get account from DB util
-		Account theAccount = accountDbUtil.getAccount(theAccountId, theAccountPin);
+		Account theAccount = accountDbUtil.getAccount(theAccountId);
 		
 		//place account into the request attribute
 		request.setAttribute("THE_ACCOUNT", theAccount);
 		
 		//send to jsp
 		//TODO : send to jsp:update-account-form.jsp -WILL NEED TO BE ADJUSTED
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/update-account-form.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
 		dispatcher.forward(request, response);
 		
 	}
@@ -180,7 +178,7 @@ public class AccountControllerServlet extends HttpServlet {
 		request.setAttribute("ACCOUNT_LIST", accounts);
 		
 		// send to the jsp page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("account-administrator-home.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/welcome-page.jsp");
 		dispatcher.forward(request, response);
 	}
 

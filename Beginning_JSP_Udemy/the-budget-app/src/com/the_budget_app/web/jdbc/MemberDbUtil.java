@@ -116,7 +116,7 @@ public class MemberDbUtil {
 			myConn = dataSource.getConnection();
 			
 			//create sql statement to get the selected member
-			String sql = "select * from member where userName=? and account_pin=?";
+			String sql = "select * from member where username=? and account_id=?";
 			
 			//create prepared statement
 			myStmt = myConn.prepareStatement(sql);

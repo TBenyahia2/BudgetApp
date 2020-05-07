@@ -8,6 +8,6 @@
     <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
     <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-11-openjdk-amd64"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="start"/>
-    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dcatalina.base=&quot;/home/tbenyahia/Projects/BudgetApp/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0&quot; -Dcatalina.home=&quot;/opt/tomcat/apache-tomcat-9.0.31&quot; -Dwtp.deploy=&quot;/home/tbenyahia/Projects/BudgetApp/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps&quot;"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dcatalina.base=&quot;/home/tbenyahia/Projects/Beginning_JSP_Udemy/BudgetApp/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0&quot; -Dcatalina.home=&quot;/opt/tomcat/apache-tomcat-9.0.31&quot; -Dwtp.deploy=&quot;/home/tbenyahia/Projects/Beginning_JSP_Udemy/BudgetApp/Beginning_JSP_Udemy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps&quot;"/>
     <stringAttribute key="server-id" value="Tomcat v9.0 Server at localhost"/>
 </launchConfiguration>

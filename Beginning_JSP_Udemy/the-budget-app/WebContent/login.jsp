@@ -12,15 +12,12 @@
         </div>
     </div>
     <div id ="container">
-       	<h3>Login</h3>
-       	<form action ="MemberControllerServlet" method ="POST">
-       	<input type="hidden" name="command" value="validateLogin" /> 
+       	<h3>Please enter credentials to access account ${THE_ACCOUNT.account_name}</h3>
+       	<form action="MemberControllerServlet" method="GET">
+		<input type="hidden" name="command" value="LOGIN" />
+		<input type="hidden" name="account_id" value="${THE_ACCOUNT.id}" />
         	<table>
            	<tbody>
-				<tr>
-					<td><label>Account ID:</label></td>
-					<td><input type="text" name="account_id" /></td>						
-				</tr>
 				<tr>
 					<td><label>Account Pin:</label></td>
 					<td><input type="text" name="account_pin" /></td>						
